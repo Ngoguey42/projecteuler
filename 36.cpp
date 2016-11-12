@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <deque>
 
@@ -43,6 +42,22 @@ bool is_palindrome2(unsigned int nbr, int base, int encoding_width, int encoding
   return true;
 }
 
+// V3 *********************************************************************** **
+// 30% faster
+bool is_palindrome3(unsigned int const nbr, int base) {
+  unsigned int rev_nbr;
+  unsigned int tmp;
+
+  rev_nbr = 0;
+  tmp = nbr;
+  while (tmp != 0) {
+    rev_nbr *= base;
+    rev_nbr += tmp % base;
+    tmp /= base;
+  }
+  return rev_nbr == nbr;
+}
+
 // MAIN ********************************************************************* **
 #define MAX (100000000 - 1)
 
@@ -52,7 +67,8 @@ int main() {
   acc = 0;
   for (unsigned int i = 0; i <= MAX; i++) {
     // if (is_palindrome1(i, 10) && is_palindrome1(i, 2)) {
-    if (is_palindrome2(i, 10, 4, 0b1111) && is_palindrome2(i, 2, 1, 0b1)) {
+    // if (is_palindrome2(i, 10, 4, 0b1111) && is_palindrome2(i, 2, 1, 0b1)) {
+    if (is_palindrome3(i, 10) && is_palindrome3(i, 2)) {
       std::cout << i << std::endl;
       acc += i;
     }
