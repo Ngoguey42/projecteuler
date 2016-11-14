@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2016/11/14 17:54:24 by ngoguey           #+#    #+#             //
-//   Updated: 2016/11/14 20:24:56 by ngoguey          ###   ########.fr       //
+//   Updated: 2016/11/14 20:30:19 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -58,7 +58,7 @@ bool Functor::_handle_number_width() {
   if (_matching_families.size() != 0) {
     std::cout << "FOUND !" << std::endl;
     for (bcd_t n: _matching_families)
-      std::cout << n.decode() << std::endl;
+      std::cout << n << std::endl;
     return true;
   }
   else

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2016/11/14 17:50:56 by ngoguey           #+#    #+#             //
-//   Updated: 2016/11/14 20:25:01 by ngoguey          ###   ########.fr       //
+//   Updated: 2016/11/14 20:32:02 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,10 +14,7 @@
 # define _51_HPP
 
 #include <iostream>
-#include <limits>
 #include <vector>
-#include <set>
-#include <cassert>
 #include <deque>
 #include <cmath>
 #include <unordered_map>
@@ -63,9 +60,6 @@ public:
   BCDNumber(std::deque<int> const &digit_indices)
     : _number(_mask_of_indices(digit_indices)) {
   }
-  BCDNumber(T n, bool)
-    : _number(n) {
-  }
   ~BCDNumber() = default;
   BCDNumber() = default;
   BCDNumber(BCDNumber const &) = default;
@@ -73,25 +67,6 @@ public:
 
   T number() const {
     return _number;
-  }
-
-  T decode() const {
-    T n;
-    T bcd;
-    T fact;
-
-    bcd = _number;
-    n = 0;
-    fact = 1;
-    while (bcd != 0) {
-      if ((bcd & 0xf) == 0xf)
-        n += 1 * fact;
-      else
-        n += (bcd & 0xf) * fact;
-      bcd >>= 4;
-      fact *= 10;
-    }
-    return n;
   }
 
   bool all_digit_equal(BCDNumber const &m) const {
@@ -117,10 +92,6 @@ public:
 
   void operator &=(BCDNumber<T> const &m) {
     _number &= m._number;
-  }
-
-  void operator +=(BCDNumber<T> const &rhs) {
-    _number = _bcd_of_bcb(this->decode() + rhs.decode());
   }
 
   void operator ~() {
@@ -150,8 +121,23 @@ public:
 };
 
 template <class T>
-std::ostream &operator <<(std::ostream &o, BCDNumber<T> const &n) {
-  o << n.decode();
+std::ostream &operator <<(std::ostream &o, BCDNumber<T> const &nbr) {
+  T n;
+  T bcd;
+  T fact;
+
+  bcd = nbr.number();
+  n = 0;
+  fact = 1;
+  while (bcd != 0) {
+    if ((bcd & 0xf) == 0xf)
+      n += 1 * fact;
+    else
+      n += (bcd & 0xf) * fact;
+    bcd >>= 4;
+    fact *= 10;
+  }
+  o << n;
   return o;
 }
 
