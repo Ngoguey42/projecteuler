@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2016/11/14 17:50:56 by ngoguey           #+#    #+#             //
-//   Updated: 2016/11/14 19:04:56 by ngoguey          ###   ########.fr       //
+//   Updated: 2016/11/14 20:25:01 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -21,6 +21,7 @@
 #include <deque>
 #include <cmath>
 #include <unordered_map>
+#include <unordered_set>
 #include <algorithm>
 #include <numeric>
 
@@ -240,26 +241,30 @@ class Functor {
 
   const Primes _pr;
 
-  bcd_t _all_digit_mask;
   unsigned int _num_digit;
   unsigned int _min_value;
   unsigned int _max_value;
+  bcd_t _all_digit_mask;
 
+  bool _handle_number_width();
+  unsigned int _fam_mask_width;
+  std::unordered_set<bcd_t, bcd_t::Hash> _matching_families;
+
+  void _handle_mask_width();
   bcd_t _fam_mask;
   bcd_t _rev_fam_mask;
 
+  void _handle_mask();
+  unsigned int _p;
   std::unordered_map<bcd_t, uint32_t, bcd_t::Hash> _family_map;
   unsigned int _max_family_size;
 
-  void _register_prime(unsigned int i);
-  int _foreach_primes();
-  int _foreach_mask(unsigned int k);
+  void _handle_prime();
 
 public:
   Functor();
-  int operator()();
+  void operator()();
 
 };
-
 
 #endif
