@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2016/11/16 17:01:39 by ngoguey           #+#    #+#             //
-//   Updated: 2016/11/16 17:23:53 by ngoguey          ###   ########.fr       //
+//   Updated: 2016/11/16 17:35:07 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -76,7 +76,6 @@ void Functor::_handle_prime(size_t const p) {
 }
 
 // PRIMES ******************************************************************* **
-
 Primes::Primes(size_t max)
   : _sieve(_sieve_of_max(max)) {
 }

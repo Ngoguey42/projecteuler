@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2016/11/16 17:01:41 by ngoguey           #+#    #+#             //
-//   Updated: 2016/11/16 17:15:35 by ngoguey          ###   ########.fr       //
+//   Updated: 2016/11/16 17:25:30 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -45,10 +45,12 @@ class Functor {
   std::unordered_set<size_t> _truncable_primes;
 
 public:
+  ~Functor() = default;
   Functor();
+  Functor(Functor const &) = delete;
+  Functor &operator =(Functor const &) = delete;
 
   void operator()();
-
 
 };
 
